@@ -15,11 +15,13 @@ public class RolController {
     @Autowired
     private RolService rolService;
 
+    @CrossOrigin("http://127.0.0.1:5500")
     @GetMapping
     public List<Rol> getAll(){
         return rolService.getRoles();
     }
 
+    @CrossOrigin("http://127.0.0.1:5500")
     @GetMapping("/{idRol}")
     public Optional<Rol> getById(@PathVariable("idRol") Long idRol){
         return rolService.getRol(idRol);

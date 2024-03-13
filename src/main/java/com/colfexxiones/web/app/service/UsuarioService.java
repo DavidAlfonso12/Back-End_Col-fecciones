@@ -29,4 +29,12 @@ public class UsuarioService {
        usuarioRepository.deleteById(idUsuario);
    }
 
+   public Optional<Usuario> getUsuarioEmailPass(String email, String password){
+       return usuarioRepository.findByEmailUser(email,password);
+   }
+
+   public List<Usuario> getUsuarioRol(Long idRol){
+       return usuarioRepository.findByRol(idRol);
+   }
+
 }

@@ -15,11 +15,13 @@ public class EstadoController {
     @Autowired
     private EstadoService estadoService;
 
+    @CrossOrigin("http://127.0.0.1:5500")
     @GetMapping
     public List<Estado> getAll(){
         return estadoService.getEstados();
     }
 
+    @CrossOrigin("http://127.0.0.1:5500")
     @GetMapping("/{idEstado}")
     public Optional<Estado> getById(@PathVariable("idEstado") Long idEstado){
         return estadoService.getEstado(idEstado);

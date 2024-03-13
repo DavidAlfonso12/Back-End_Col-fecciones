@@ -26,9 +26,8 @@ public class Usuario {
     @Column(nullable = false)
     private String usuario_password;
 
-    @Column(nullable = false)
     private int usuario_documento;
-
+    private String usuario_direccion;
     private String usuario_empresa;
     private String usuario_foto;
     private int usuario_ventas;
