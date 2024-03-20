@@ -1,17 +1,11 @@
 package com.colfexxiones.web.app.controllers;
 
 import com.colfexxiones.web.app.entity.Imagen;
-import com.colfexxiones.web.app.entity.Producto;
-import com.colfexxiones.web.app.repository.UploadFileRepository;
 import com.colfexxiones.web.app.service.ImagenService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/v1/imagenes")
@@ -19,9 +13,6 @@ public class ImagenController {
 
     @Autowired
     ImagenService imagenService;
-
-    @Autowired
-    UploadFileRepository uploadFileRepository;
 
     @GetMapping
     public List<Imagen> getAll(){
@@ -33,6 +24,7 @@ public class ImagenController {
         return imagenService.getImagenByIdProducto(idImagen);
     }
 
+    @CrossOrigin("http://127.0.0.1:5500")
     @PostMapping
     public Imagen saveUpdate(@RequestBody Imagen imagen){
         imagenService.saveOrUpdate(imagen);
@@ -44,8 +36,5 @@ public class ImagenController {
         imagenService.delete(idImagen);
     }
 
-    @PostMapping("/picture")
-    private ResponseEntity<String> uploadPic(@RequestParam("file") MultipartFile file, Long idProducto) throws Exception {
-        return new ResponseEntity<>(uploadFileRepository.handleFileUpload(file,idProducto), HttpStatus.OK);
-    }
+
 }

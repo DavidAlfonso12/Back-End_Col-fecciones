@@ -19,22 +19,26 @@ public class ProductoController {
     @Autowired
     ImagenService imagenService;
 
+    @CrossOrigin("http://127.0.0.1:5500")
     @GetMapping
     public List<Producto> getAll(){
         return productoService.getProductos();
     }
 
+    @CrossOrigin("http://127.0.0.1:5500")
     @GetMapping("/{idProducto}")
     public Optional<Producto> getById(@PathVariable("idProducto")Long idProducto){
         return productoService.getProducto(idProducto);
     }
 
+    @CrossOrigin("http://127.0.0.1:5500")
     @PostMapping
     public Producto saveUpdate(@RequestBody Producto producto){
         productoService.saveOrUpdate(producto);
         return producto;
     }
 
+    @CrossOrigin("http://127.0.0.1:5500")
     @DeleteMapping("/{idProducto}")
     public void delete(@PathVariable("idProducto")Long idProducto){
         imagenService.deleteByIdProducto(idProducto);

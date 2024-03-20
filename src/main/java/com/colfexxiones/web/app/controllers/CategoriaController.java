@@ -15,22 +15,26 @@ public class CategoriaController {
     @Autowired
     private CategoriaService categoriaService;
 
+    @CrossOrigin("http://127.0.0.1:5500")
     @GetMapping
     public List<Categoria> getAll(){
         return categoriaService.getCategorias();
     }
 
+    @CrossOrigin("http://127.0.0.1:5500")
     @GetMapping("/{idCategoria}")
     public Optional<Categoria> getById(@PathVariable("idCategoria") Long idCategoria){
         return categoriaService.getCategoria(idCategoria);
     }
 
+    @CrossOrigin("http://127.0.0.1:5500")
     @PostMapping
     public Categoria saveUpdate(@RequestBody Categoria categoria){
         categoriaService.saveOrUpdate(categoria);
         return categoria;
     }
 
+    @CrossOrigin("http://127.0.0.1:5500")
     @DeleteMapping("/{idCategoria}")
     public void delete(@PathVariable("idCategoria") Long idCategoria){
         categoriaService.delete(idCategoria);

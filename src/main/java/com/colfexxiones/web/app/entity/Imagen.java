@@ -12,12 +12,13 @@ public class Imagen {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idImagen;
 
-    @Column(nullable = false)
-    private String imagen_nombre;
+    @Column(nullable = false, columnDefinition = "LONGTEXT")
+    private String imagen_base64;
 
     @ManyToOne
     @JoinColumn(name = "idProducto", nullable = false)
     private Producto producto;
+
 
     public Long getIdImagen() {
         return idImagen;
@@ -27,12 +28,12 @@ public class Imagen {
         this.idImagen = idImagen;
     }
 
-    public String getImagen_nombre() {
-        return imagen_nombre;
+    public String getImagen_base64() {
+        return imagen_base64;
     }
 
-    public void setImagen_nombre(String imagen_nombre) {
-        this.imagen_nombre = imagen_nombre;
+    public void setImagen_base64(String imagen_base64) {
+        this.imagen_base64 = imagen_base64;
     }
 
     public Producto getProducto() {
