@@ -24,6 +24,10 @@ public class ProductoService {
         return productoRepository.findAll();
     }
 
+    public List<Producto> getProductosVendedor(Long idVendedor){
+        return productoRepository.findByVendedor(idVendedor);
+    }
+
     public Optional<Producto> getProducto(Long idProducto){
         return productoRepository.findById(idProducto);
     }

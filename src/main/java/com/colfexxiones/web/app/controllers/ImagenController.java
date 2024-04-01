@@ -19,6 +19,7 @@ public class ImagenController {
         return imagenService.getImagenes();
     }
 
+    @CrossOrigin("http://127.0.0.1:5500")
     @GetMapping("/{idImagen}")
     public List<Imagen> getById(@PathVariable("idImagen") Long idImagen){
         return imagenService.getImagenByIdProducto(idImagen);

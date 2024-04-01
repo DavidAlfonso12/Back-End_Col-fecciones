@@ -1,49 +1,27 @@
-package com.colfexxiones.web.app.entity;
+package com.colfexxiones.web.app.DTO;
 
-import jakarta.persistence.*;
-import lombok.Data;
-import org.antlr.v4.runtime.misc.NotNull;
-import org.hibernate.annotations.NotFound;
+import com.colfexxiones.web.app.entity.Categoria;
+import com.colfexxiones.web.app.entity.Estado;
+import com.colfexxiones.web.app.entity.Imagen;
+import com.colfexxiones.web.app.entity.Usuario;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
-@Data
-@Entity
-@Table(name = "tbl_productos")
-public class Producto {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ProductoDTO {
+
     private Long idProducto;
-
-    @Column(nullable = false)
     private String producto_nombre;
-
     private String producto_descripcion;
-
-    @Column(nullable = false)
     private double producto_precio;
-
-    @Column(nullable = false)
     private LocalDateTime fecha_registro;
-
-    @Column(nullable = false)
     private int cantidad_disponible;
-
-    @Column(nullable = false)
     private int cantidad_vendidos;
-
-
-    @ManyToOne
-    @JoinColumn(name = "idUsuario", nullable = false)
     private Usuario usuario;
-
-    @ManyToOne
-    @JoinColumn(name = "idCategoria", nullable = false)
     private Categoria categoria;
-
-    @ManyToOne
-    @JoinColumn(name = "idEstado", nullable = false)
     private Estado estado;
+
+    private List<Imagen> imagenes;
 
     public Long getIdProducto() {
         return idProducto;
@@ -123,5 +101,13 @@ public class Producto {
 
     public void setEstado(Estado estado) {
         this.estado = estado;
+    }
+
+    public List<Imagen> getImagenes() {
+        return imagenes;
+    }
+
+    public void setImagenes(List<Imagen> imagenes) {
+        this.imagenes = imagenes;
     }
 }
