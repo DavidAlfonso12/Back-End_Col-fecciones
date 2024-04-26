@@ -64,6 +64,7 @@ public class ProductoController {
         productoDTO.setProducto_nombre(producto.getProducto_nombre());
         productoDTO.setProducto_precio(producto.getProducto_precio());
         productoDTO.setImagenes(imagenes);
+        productoDTO.setUsuario(producto.getUsuario());
 
         return productoDTO;
     }
