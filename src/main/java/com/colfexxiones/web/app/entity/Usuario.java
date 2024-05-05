@@ -32,6 +32,7 @@ public class Usuario {
     private String usuario_foto;
     private int usuario_ventas;
     private int usuario_compras;
+    private String usuario_descripcion;
 
     @ManyToOne
     @JoinColumn(name = "idEstado",nullable = false)
