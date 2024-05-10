@@ -14,4 +14,11 @@ public class Estado {
     private String estado_descripcion;
 
 
+    public Estado() {
+    }
+
+    public Estado(Long idEstado, String estado_descripcion) {
+        this.idEstado = idEstado;
+        this.estado_descripcion = estado_descripcion;
+    }
 }
