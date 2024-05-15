@@ -6,6 +6,7 @@ import com.colfexxiones.web.app.repository.UsuarioRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -16,6 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -61,17 +63,28 @@ class UsuarioServiceTest {
     @Test
     void getUsuario() {
         Usuario usuario1 = new Usuario(15L,"First Test","Last name First test","35555","123","firstTest@gmail.com",estado);
-        when(usuarioRepository.findById(15L)).thenReturn(Optional.of(usuario1));
+        when(usuarioRepository.findById(anyLong())).thenReturn(Optional.of(usuario1));
 
-        Optional<Usuario> result = usuarioService.getUsuario(15L);
+        Optional<Usuario> result = usuarioService.getUsuario(anyLong());
 
-        verify(usuarioRepository, times(1)).findById(15L);
+        verify(usuarioRepository, times(1)).findById(anyLong());
         assertTrue(result.isPresent());
-        assertEquals(usuario1, result.get());
+        assertEquals(usuario1, result.orElse(null));
     }
 
     @Test
     void saveOrUpdate() {
+        Usuario usuario2 = new Usuario(16L,"Second Test","Last name Second test","35555","123","secondTest@gmail.com",estado);
+
+        //when
+        usuarioService.saveOrUpdate(usuario2);
+
+        //then
+        ArgumentCaptor<Usuario> usuarioArgumentCaptor = ArgumentCaptor.forClass(Usuario.class);
+        verify(usuarioRepository).save(usuarioArgumentCaptor.capture());
+
+       Usuario capturedUsuario = usuarioArgumentCaptor.getValue();
+       assertThat(capturedUsuario).isEqualTo(usuario2);
     }
 
     @Test
