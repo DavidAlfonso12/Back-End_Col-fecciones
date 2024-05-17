@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -89,13 +90,39 @@ class UsuarioServiceTest {
 
     @Test
     void delete() {
+        Long idUsuario = 10L;
+
+        //when
+        usuarioService.delete(idUsuario);
+
+        //then
+        verify(usuarioRepository, times(1)).deleteById(idUsuario);
     }
 
     @Test
     void getUsuarioEmailPass() {
+        String email = "emailTest@gmail.com";
+        String password = "123";
+
+        when(usuarioRepository.findByEmailUser(email,password)).thenReturn(Optional.of(usuario));
+        Optional<Usuario> result = usuarioService.getUsuarioEmailPass(email,password);
+
+        verify(usuarioRepository, times(1)).findByEmailUser(email,password);
+        assertTrue(result.isPresent());
+        assertEquals(usuario, result.orElse(null));
     }
 
     @Test
     void getUsuarioRol() {
+        Long idRol = 4L;
+        List<Usuario> usuarios = Arrays.asList(usuario);
+
+        when(usuarioRepository.findByRol(idRol)).thenReturn(usuarios);
+
+        List<Usuario> result = usuarioService.getUsuarioRol(idRol);
+
+        verify(usuarioRepository, times(1)).findByRol(idRol);
+        assertEquals(1, result.size());
+        assertEquals(usuario, result.get(0));
     }
 }
