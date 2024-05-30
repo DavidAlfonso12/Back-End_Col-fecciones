@@ -2,6 +2,7 @@ package com.colfexxiones.web.app.repository;
 
 import com.colfexxiones.web.app.entity.Producto;
 import com.colfexxiones.web.app.entity.Usuario;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -19,4 +20,5 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
     @Query("SELECT Vendedores FROM Usuario Vendedores WHERE Vendedores.rol.idRol = :rol")
     List<Usuario> findByRol(@Param("rol")Long idRol);
+
 }

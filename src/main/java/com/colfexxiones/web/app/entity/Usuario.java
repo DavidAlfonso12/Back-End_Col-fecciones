@@ -1,7 +1,10 @@
 package com.colfexxiones.web.app.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @Entity
@@ -37,6 +40,7 @@ public class Usuario {
     @ManyToOne
     @JoinColumn(name = "idEstado",nullable = false)
     private Estado estado;
+
 
     public Long getIdUsuario() {
         return idUsuario;

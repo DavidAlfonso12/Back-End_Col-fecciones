@@ -18,7 +18,8 @@ public class UsuarioService {
    }
 
    public Optional<Usuario> getUsuario(Long idUsuario){
-       return usuarioRepository.findById(idUsuario);
+       Optional<Usuario> usuario = usuarioRepository.findById(idUsuario);
+       return usuario;
    }
 
    public void saveOrUpdate(Usuario usuario){

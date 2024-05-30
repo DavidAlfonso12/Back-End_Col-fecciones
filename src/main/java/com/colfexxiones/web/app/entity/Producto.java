@@ -6,6 +6,7 @@ import org.antlr.v4.runtime.misc.NotNull;
 import org.hibernate.annotations.NotFound;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -44,6 +45,7 @@ public class Producto {
     @ManyToOne
     @JoinColumn(name = "idEstado", nullable = false)
     private Estado estado;
+
 
     public Long getIdProducto() {
         return idProducto;
