@@ -1,10 +1,12 @@
 package com.colfexxiones.web.app.service;
 
 import com.colfexxiones.web.app.entity.CalificacionProducto;
-import com.colfexxiones.web.app.entity.Producto;
 import com.colfexxiones.web.app.repository.CalificacionProductoRepository;
+import com.colfexxiones.web.app.repository.ProductoRepository;
+import com.colfexxiones.web.app.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -22,7 +24,8 @@ public class CalificacionProductoService {
         return calificacionProductoRepository.findByUsuario(idUsuario);
     }
 
-    public void saveOrUpdate(CalificacionProducto calificacionProducto){
+    public CalificacionProducto saveOrUpdate(@RequestBody CalificacionProducto calificacionProducto){
         calificacionProductoRepository.save(calificacionProducto);
+        return calificacionProducto;
     }
 }

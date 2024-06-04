@@ -2,11 +2,11 @@ package com.colfexxiones.web.app.controllers;
 
 import com.colfexxiones.web.app.DTO.DetalleFacturaDTO;
 import com.colfexxiones.web.app.DTO.FacturaResponseDTO;
-import com.colfexxiones.web.app.DTO.ProductoFacturaDTO;
 import com.colfexxiones.web.app.entity.DetalleFactura;
 import com.colfexxiones.web.app.entity.Factura;
 import com.colfexxiones.web.app.service.DetalleFacturaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -30,8 +30,16 @@ public class DetalleFacturaController {
         return detalleFacturaService.getDetalleFacturaIdFactura(idUsuario);
     }
 
-    @GetMapping("/producto/{idProducto}")
-    public List<Factura> getFacturasFechas(Date fechaInicio, Date fechaFin){
+    @GetMapping("/FacturasFecha/{fechaInicio}/{fechaFin}")
+    public List<Factura> getFacturasFechas(@PathVariable("fechaInicio")
+                                               @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaInicio,
+                                           @PathVariable("fechaFin")
+                                               @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaFin){
         return detalleFacturaService.getFacturasFecha(fechaInicio, fechaFin);
+    }
+
+    @GetMapping("/FacturasVendedor/{idUsuario}")
+    public List<DetalleFactura> getFacturasByVendedor(@PathVariable("idUsuario") Long idUsuario){
+        return detalleFacturaService.getFacturasVendedor(idUsuario);
     }
 }

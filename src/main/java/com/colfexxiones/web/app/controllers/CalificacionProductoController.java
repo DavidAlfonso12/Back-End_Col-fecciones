@@ -25,4 +25,10 @@ public class CalificacionProductoController {
     public List<CalificacionProducto> getCalificacionesProducto(@PathVariable("id") Long id){
         return calificacionProductoService.getCalificacionProducto(id);
     }
+
+    @PostMapping
+    public CalificacionProducto saveUpdate(@RequestBody CalificacionProducto calificacionProducto){
+        calificacionProductoService.saveOrUpdate(calificacionProducto);
+        return calificacionProducto;
+    }
 }

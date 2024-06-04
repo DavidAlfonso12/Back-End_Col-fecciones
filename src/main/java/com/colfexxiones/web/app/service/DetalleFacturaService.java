@@ -63,6 +63,10 @@ public class DetalleFacturaService {
         return facturaRepository.buscarPorFecha(fechaInicio, fechaFin);
     }
 
+    public List<DetalleFactura> getFacturasVendedor(Long idUsuario){
+        return detalleFacturaRepository.findDetalleIdUsuario(idUsuario);
+    }
+
     public List<FacturaResponseDTO> getDetalleFacturaIdFactura(Long idUsuario){
         List<FacturaResponseDTO> productoFacturaDTO = new ArrayList<>();
         List<Factura> facturas = facturaRepository.findByUsuario(idUsuario);

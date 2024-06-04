@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.Optional;
 
 @Data
 @Entity
@@ -24,4 +25,5 @@ public class CalificacionProducto {
     @ManyToOne()
     @JoinColumn(name = "producto_id", nullable = false)
     private Producto producto;
+    
 }

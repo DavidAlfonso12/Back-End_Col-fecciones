@@ -12,4 +12,7 @@ import java.util.List;
 public interface DetalleFacturaRepository extends JpaRepository<DetalleFactura, Integer> {
     @Query("SELECT d FROM DetalleFactura d WHERE d.factura.id = :idFactura")
     List<DetalleFactura> findDetalleIdFactura(@Param("idFactura") Integer idFactura);
+
+    @Query("SELECT v FROM DetalleFactura v WHERE v.producto.usuario.idUsuario = :idUsuario")
+    List<DetalleFactura> findDetalleIdUsuario(@Param("idUsuario") Long idUsuario);
 }
