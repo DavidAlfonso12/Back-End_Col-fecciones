@@ -21,6 +21,7 @@ public class ProductoDTO {
     private Categoria categoria;
     private Estado estado;
 
+
     private List<Imagen> imagenes;
 
     public Long getIdProducto() {

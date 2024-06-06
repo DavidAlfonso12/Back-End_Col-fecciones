@@ -13,5 +13,6 @@ import java.util.List;
 public class FacturaResponseDTO {
     private Integer id;
     private Date fecha;
+    private String direccion;
     private List<ProductoDTO> productos;
 }

@@ -21,6 +21,10 @@ public class DetalleFactura {
 
     @Column(name = "valor_compra_unitaria")
     private int valorUnidadCompra;
+
+    @Column(nullable = false)
+    private String direccion;
+
     @ManyToOne
     @JoinColumn(name = "factura_id", nullable = false)
     private Factura factura;

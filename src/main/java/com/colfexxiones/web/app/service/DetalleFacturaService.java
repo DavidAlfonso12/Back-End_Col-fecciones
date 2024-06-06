@@ -46,6 +46,7 @@ public class DetalleFacturaService {
             Producto productoEntity = new Producto();
             productoEntity.setIdProducto(producto.getId());
             detalleFacturaEntity.setProducto(productoEntity);
+            detalleFacturaEntity.setDireccion(detalleFactura.getDireccion());
             detalleFacturaRepository.save(detalleFacturaEntity);
         });
 
@@ -74,6 +75,7 @@ public class DetalleFacturaService {
             FacturaResponseDTO facturaResponseDTO = new FacturaResponseDTO();
             facturaResponseDTO.setId(factura.getId());
             facturaResponseDTO.setFecha(factura.getFecha());
+
             List<DetalleFactura> detalleFacturas = detalleFacturaRepository.findDetalleIdFactura(factura.getId());
             List<ProductoDTO> productos = new ArrayList<>();
             detalleFacturas.forEach(detalleFactura -> {
@@ -82,9 +84,13 @@ public class DetalleFacturaService {
                 productoDTO.setProducto_nombre(detalleFactura.getProducto().getProducto_nombre());
                 productoDTO.setProducto_descripcion(detalleFactura.getProducto().getProducto_descripcion());
                 productoDTO.setImagenes(imagenService.getImagenByIdProducto(detalleFactura.getProducto().getIdProducto()));
+                productoDTO.setCantidad_vendidos(detalleFactura.getCantidadComprado());
+                productoDTO.setProducto_precio(detalleFactura.getValorUnidadCompra());
+                facturaResponseDTO.setDireccion(detalleFactura.getDireccion());
                 productos.add(productoDTO);
             });
             facturaResponseDTO.setProductos(productos);
+
             productoFacturaDTO.add(facturaResponseDTO);
         });
         return productoFacturaDTO;

@@ -15,5 +15,6 @@ import java.util.List;
 public class DetalleFacturaDTO {
 
     private Long idUsuario;
+    private String direccion;
     private List<ProductoFacturaDTO> productos;
 }
