@@ -28,6 +28,23 @@ public class ProductoService {
         return productoRepository.findByVendedor(idVendedor);
     }
 
+    public Optional<Producto> restarCantidadProducto(Long idProducto, int cantidad){
+        Optional<Producto> productoOpcional = productoRepository.findById(idProducto);
+
+        if (productoOpcional.isPresent()){
+            Producto producto = productoOpcional.get();
+            if (producto.getCantidad_disponible() >= cantidad){
+                producto.setCantidad_disponible(producto.getCantidad_disponible() - cantidad);
+                productoRepository.save(producto);
+                return Optional.of(producto);
+            }else{
+                throw new IllegalArgumentException("La cantidad a restar excede la cantidad disponible del producto.");
+            }
+        }else{
+            return Optional.empty();
+        }
+    }
+
     public Optional<Producto> getProducto(Long idProducto){
         return productoRepository.findById(idProducto);
     }

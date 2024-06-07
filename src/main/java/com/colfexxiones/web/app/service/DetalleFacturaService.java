@@ -30,6 +30,9 @@ public class DetalleFacturaService {
     @Autowired
     ImagenService imagenService;
 
+    @Autowired
+    ProductoService productoService;
+
     public void saveOrUpdate(DetalleFacturaDTO detalleFactura) {
         Factura factura = new Factura();
         factura.setFecha(new Date());
@@ -48,6 +51,7 @@ public class DetalleFacturaService {
             detalleFacturaEntity.setProducto(productoEntity);
             detalleFacturaEntity.setDireccion(detalleFactura.getDireccion());
             detalleFacturaRepository.save(detalleFacturaEntity);
+            productoService.restarCantidadProducto(detalleFacturaEntity.getProducto().getIdProducto(), detalleFacturaEntity.getCantidadComprado());
         });
 
     }
