@@ -30,7 +30,6 @@ public class ProductoService {
 
     public Optional<Producto> restarCantidadProducto(Long idProducto, int cantidad){
         Optional<Producto> productoOpcional = productoRepository.findById(idProducto);
-
         if (productoOpcional.isPresent()){
             Producto producto = productoOpcional.get();
             if (producto.getCantidad_disponible() >= cantidad){
@@ -40,6 +39,18 @@ public class ProductoService {
             }else{
                 throw new IllegalArgumentException("La cantidad a restar excede la cantidad disponible del producto.");
             }
+        }else{
+            return Optional.empty();
+        }
+    }
+
+    public Optional<Producto> sumarCantidadVentaProducto(Long idProducto, int cantidad){
+        Optional<Producto> productoOpcional = productoRepository.findById(idProducto);
+        if (productoOpcional.isPresent()){
+            Producto producto = productoOpcional.get();
+            producto.setCantidad_vendidos(producto.getCantidad_vendidos() + cantidad);
+            productoRepository.save(producto);
+            return Optional.of(producto);
         }else{
             return Optional.empty();
         }

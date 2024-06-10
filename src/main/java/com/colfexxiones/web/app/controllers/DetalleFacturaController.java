@@ -25,17 +25,31 @@ public class DetalleFacturaController {
         detalleFacturaService.saveOrUpdate(detalleFactura);
     }
 
+    @GetMapping()
+    public List<DetalleFactura> getAllFacturas(){
+        return detalleFacturaService.getAlFacturas();
+    }
+
     @GetMapping("/usuario/{idUsuario}")
     public List<FacturaResponseDTO> getFacturasUsuario(@PathVariable("idUsuario") Long idUsuario){
         return detalleFacturaService.getDetalleFacturaIdFactura(idUsuario);
     }
 
-    @GetMapping("/FacturasFecha/{fechaInicio}/{fechaFin}")
-    public List<Factura> getFacturasFechas(@PathVariable("fechaInicio")
+    @GetMapping("/FacturasFecha")
+    public List<DetalleFactura> getFacturasFechas(@RequestParam("fechaInicio")
                                                @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaInicio,
-                                           @PathVariable("fechaFin")
+                                           @RequestParam("fechaFin")
                                                @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaFin){
         return detalleFacturaService.getFacturasFecha(fechaInicio, fechaFin);
+    }
+
+    @GetMapping("/FacturasFechasUsuario")
+    public List<DetalleFactura> getFacturasFechasUsuario(@RequestParam("idUsuario")Long idUsuario,
+                                                  @RequestParam("fechaInicio")
+                                           @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaInicio,
+                                           @RequestParam("fechaFin")
+                                           @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaFin){
+        return detalleFacturaService.getFacturasFechaUsuario(idUsuario,fechaInicio, fechaFin);
     }
 
     @GetMapping("/FacturasVendedor/{idUsuario}")

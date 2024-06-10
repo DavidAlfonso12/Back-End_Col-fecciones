@@ -14,6 +14,5 @@ public interface FacturaRepository extends JpaRepository<Factura, Integer> {
     @Query("SELECT factura FROM Factura factura WHERE factura.usuario.idUsuario = :idUsuario")
     List<Factura> findByUsuario(@Param("idUsuario") Long usuario);
 
-    @Query("SELECT f FROM Factura f WHERE f.fecha BETWEEN :fechaInicio AND :fechaFin")
-    List<Factura> buscarPorFecha(@Param("fechaInicio")Date fechaInicio,@Param("fechaFin") Date fechaFin);
+
 }

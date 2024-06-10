@@ -52,6 +52,7 @@ public class DetalleFacturaService {
             detalleFacturaEntity.setDireccion(detalleFactura.getDireccion());
             detalleFacturaRepository.save(detalleFacturaEntity);
             productoService.restarCantidadProducto(detalleFacturaEntity.getProducto().getIdProducto(), detalleFacturaEntity.getCantidadComprado());
+            productoService.sumarCantidadVentaProducto(detalleFacturaEntity.getProducto().getIdProducto(), detalleFacturaEntity.getCantidadComprado());
         });
 
     }
@@ -60,12 +61,20 @@ public class DetalleFacturaService {
         return detalleFacturaRepository.findById(idDetalle);
     }
 
+    public List<DetalleFactura> getAlFacturas(){
+        return detalleFacturaRepository.findAll();
+    }
+
     public List<Factura> getFacturasUsuario(Long idUsuario){
         return facturaRepository.findByUsuario(idUsuario);
     }
 
-    public List<Factura> getFacturasFecha(Date fechaInicio, Date fechaFin){
-        return facturaRepository.buscarPorFecha(fechaInicio, fechaFin);
+    public List<DetalleFactura> getFacturasFecha(Date fechaInicio, Date fechaFin){
+        return detalleFacturaRepository.buscarPorFecha(fechaInicio, fechaFin);
+    }
+
+    public List<DetalleFactura> getFacturasFechaUsuario(Long idUsuario, Date fechaInicio, Date fechaFin){
+        return detalleFacturaRepository.buscarPorFechaYUsuario(idUsuario,fechaInicio,fechaFin);
     }
 
     public List<DetalleFactura> getFacturasVendedor(Long idUsuario){

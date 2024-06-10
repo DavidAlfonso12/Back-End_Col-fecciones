@@ -21,4 +21,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     @Query("SELECT Vendedores FROM Usuario Vendedores WHERE Vendedores.rol.idRol = :rol")
     List<Usuario> findByRol(@Param("rol")Long idRol);
 
+    @Query("SELECT email FROM Usuario email WHERE email.usuario_email = :emailRecibido")
+    Optional<Usuario> findByEmail(@Param("emailRecibido") String email);
 }
